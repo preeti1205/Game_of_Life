@@ -1,5 +1,6 @@
-(function( global ) {
-  "use strict" ;
+(function( global ) { // global is simply the name of the parameter inside the function body --
+  //anonymous function which will be invoked immediately
+  "use strict" ;   //meaning that all the variables are in strict mode : can't be used without declaring i.e without var keyword
 
   //class Cell
   function Cell( config ) {
@@ -21,7 +22,7 @@
       this.render();
     }
   }
-  
+
   //container called Grid.prototype for common methods and properties
   Grid.prototype = {
     createCell: function( config ) {
@@ -69,4 +70,4 @@
 
   global.Grid = Grid;
 
-  }(window));
+}(window));  //parameter passed to the outermost function which will be called global inside the function
