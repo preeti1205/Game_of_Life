@@ -31,16 +31,16 @@
     },
 
     getCellAt: function(x, y) {
-      if(!this.grid[y]) {
-        console.warn("No such Y coordinates: %i (grid size is: x[%i], y[%i])", y, this.colsCount, this.rowsCount);
+      if(!this.grid[x]) {
+        console.warn("No such X coordinates: %i (grid size is: x[%i], y[%i])", y, this.rowsCount, this.colsCount);
         //%i is similar to %i for integer in cpp
         return false;
       }
-      if ( !this.grid[y][x]) {
-        console.warn("No such X coordinates: %i (grid size is: x[%i], y[%i])", x, this.colsCount, this.rowsCount);
+      if ( !this.grid[x][y]) {
+        console.warn("No such Y coordinates: %i (grid size is: x[%i], y[%i])", x, this.rowsCount, this.colsCount);
         return false;
       }
-      return this.grid[y][x];
+      return this.grid[x][y];
     },
 
     render: function( options ) {
@@ -52,13 +52,14 @@
         console.error("Placeholder is not present");
         return;
       }
+
       var i, j, $row, $cell, cell, cellId = 0;
       for( i = 0; i < this.rowsCount; i += 1) {
         this.grid[i] = [];
         $row = $('<div class = "row"></div>').prependTo(this.$placeholder);
         for( j = 0; j < this.colsCount; j += 1) {
           $cell = $('<div class = "cell"></div>').appendTo($row);
-          cell = this.createCell({$element: $cell, x: j, y: i});
+          cell = this.createCell({$element: $cell, x: i, y: j});
           this.grid[i].push(cell);
           this.cells.push(cell);
         }

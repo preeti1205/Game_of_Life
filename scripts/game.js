@@ -5,11 +5,11 @@ var game = function(grid) {
   for( var i = 0; i < r; i++) {
     for (var j = 0; j < c; j++) {
       var sum = findSum( i, j, grid, r, c);
-      if (sum == 3) {
+      if (sum == 3) { //always 1
         if (grid.getCellAt(i, j).val == 0) grid.getCellAt(i, j).val = 2;
         else grid.getCellAt(i, j).val = 3;
       }
-      if (sum == 4) {
+      if (sum == 4) { //stays as it is
         if (grid.getCellAt(i, j).val == 0) grid.getCellAt(i, j).val = 0;
         else grid.getCellAt(i, j).val = 3;
       }
@@ -20,7 +20,8 @@ var game = function(grid) {
 
   for(var i = 0; i < r; i++) {
     for(var j = 0; j < c; j++) {
-      grid.getCellAt(i, j).val >> 1;
+      (grid.getCellAt(i, j).val) >>= 1;
+      //console.log(grid.getCellAt(i, j).val, i, j);
     }
   }
 
@@ -33,9 +34,11 @@ var findSum = function( i, j, grid, r, c) {
     for(var y = j - 1; y <= j + 1; y++) {
       if (x >= 0 && x < r && y >= 0 && y < c) {
         //if (grid.getCellAt(x,y).$el.css("background") == "green")
-          sum += grid.getCellAt(i, j).val;
+          sum += ( grid.getCellAt(x, y).val & 1);
+          //console.log( (grid.getCellAt(x, y).val & 1), x, y);
         }
     }
   }
+  //console.log(sum, i, j, "final");
   return sum;
 }

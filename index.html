@@ -33,6 +33,7 @@ var looper = function(grid, dict) {
   for(var i = 0; i < grid.rowsCount; i++) {
     for(var j = 0; j < grid.colsCount; j++) {
       var nextVal = grid.getCellAt(i,j).val ;
+      //console.log(nextVal);
       grid.getCellAt(i,j).$el.css('background', dict[nextVal]);
     }
   }
@@ -42,8 +43,8 @@ var looper = function(grid, dict) {
   "use strict";
 
   var grid = new Grid({
-    rows: 20,
-    cols: 20,
+    rows: 15,
+    cols: 15,
     render: {
       placeholder: ".grid"
     }
@@ -56,12 +57,18 @@ var looper = function(grid, dict) {
     for(var j = 0; j < grid.colsCount; j++) {
        var randomVar = Math.floor(Math.random()*2);  //In JS, random function generates float
        grid.getCellAt(i,j).val = randomVar ;
-      //console.log(grid.getCellAt(i,j).val);
-      grid.getCellAt(i,j).$el.css('background', dict[randomVar]);
+      //console.log( i, j, grid.getCellAt(i,j).val);
+      grid.getCellAt(i,j).$el.css('background', "red");
     }
   }
 
-for(var i = 0; i < 50; i++) {
+  grid.getCellAt(5,4).$el.css('background', 'green');
+  grid.getCellAt(5,5).$el.css('background', 'green');
+  grid.getCellAt(5,6).$el.css('background', 'green');
+  //grid.getCellAt(4,5).$el.css('background', 'green');
+  //grid.getCellAt(6,5).$el.css('background', 'green');
+
+for(var i = 0; i < 10; i++) {
  grid = game(grid);
  looper(grid, dict);
  }
