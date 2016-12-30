@@ -4,7 +4,7 @@
   <title> Game of Life </title>
   <style>
   .grid {
-    border: 1px solid #ddd
+    border: 1px solid #ddd;
     display: inline-block;
     padding: 1px;
     }
@@ -27,6 +27,7 @@
 
 <script src = "scripts/jquery.min.js"></script>
 <script src = "scripts/grid.js"></script>
+<script src = "scripts/game.js"></script>
 <script>
 (function() {
   "use strict";
@@ -38,7 +39,18 @@
       placeholder: ".grid"
     }
   });
-  grid.getCellAt(2,1).$el.css('background', 'green');
+  //grid.getCellAt(2,1).$el.css('background', 'green');
+  var dict = {0: 'red', 1: 'green'};
+  //grid.getCellAt(2,1).$el.css('background', dict[1]);
+
+  for(var i = 0; i < grid.rowsCount; i++) {
+    for(var j = 0; j < grid.colsCount; j++) {
+      var randomVar = Math.floor(Math.random()*2);  //In JS, random function generates float
+      console.log(randomVar);
+      grid.getCellAt(i,j).$el.css('background', dict[randomVar]);
+    }
+  }
+
 }());
 </script>
 </body>
