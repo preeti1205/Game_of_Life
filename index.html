@@ -29,27 +29,42 @@
 <script src = "scripts/grid.js"></script>
 <script src = "scripts/game.js"></script>
 <script>
+var looper = function(grid, dict) {
+  for(var i = 0; i < grid.rowsCount; i++) {
+    for(var j = 0; j < grid.colsCount; j++) {
+      var nextVal = grid.getCellAt(i,j).val ;
+      grid.getCellAt(i,j).$el.css('background', dict[nextVal]);
+    }
+  }
+};
+
 (function() {
   "use strict";
 
   var grid = new Grid({
-    rows: 13,
-    cols: 13,
+    rows: 20,
+    cols: 20,
     render: {
       placeholder: ".grid"
     }
   });
   //grid.getCellAt(2,1).$el.css('background', 'green');
   var dict = {0: 'red', 1: 'green'};
-  //grid.getCellAt(2,1).$el.css('background', dict[1]);
+
 
   for(var i = 0; i < grid.rowsCount; i++) {
     for(var j = 0; j < grid.colsCount; j++) {
-      var randomVar = Math.floor(Math.random()*2);  //In JS, random function generates float
-      console.log(randomVar);
+       var randomVar = Math.floor(Math.random()*2);  //In JS, random function generates float
+       grid.getCellAt(i,j).val = randomVar ;
+      //console.log(grid.getCellAt(i,j).val);
       grid.getCellAt(i,j).$el.css('background', dict[randomVar]);
     }
   }
+
+for(var i = 0; i < 50; i++) {
+ grid = game(grid);
+ looper(grid, dict);
+ }
 
 }());
 </script>

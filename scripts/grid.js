@@ -7,6 +7,7 @@
     this.$el = config.$element;
     this.x = config.x;
     this.y = config.y;
+    this.val = config.val;
   }
 
   //class Grid

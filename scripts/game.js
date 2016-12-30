@@ -1,26 +1,26 @@
 var game = function(grid) {
-  var r = grid.x;
-  var c = grid.y;
+  var r = grid.rowsCount;
+  var c = grid.colsCount;
 
   for( var i = 0; i < r; i++) {
     for (var j = 0; j < c; j++) {
       var sum = findSum( i, j, grid, r, c);
       if (sum == 3) {
-        if (grid[i][j] == 0) grid[i][j] = 2;
-        else grid[i][j] = 3;
+        if (grid.getCellAt(i, j).val == 0) grid.getCellAt(i, j).val = 2;
+        else grid.getCellAt(i, j).val = 3;
       }
       if (sum == 4) {
-        if (grid[i][j] == 0) grid[i][j] = 0;
-        else grid[i][j] = 3;
+        if (grid.getCellAt(i, j).val == 0) grid.getCellAt(i, j).val = 0;
+        else grid.getCellAt(i, j).val = 3;
       }
-      else if (grid[i][j] == 0) grid[i][j] = 0;
-      else grid[i][j] = 1;
+      else if (grid.getCellAt(i, j).val == 0) grid.getCellAt(i, j).val = 0;
+      else grid.getCellAt(i, j).val = 1;
     }
   }
 
   for(var i = 0; i < r; i++) {
     for(var j = 0; j < c; j++) {
-      grid[i][j] >> 1;
+      grid.getCellAt(i, j).val >> 1;
     }
   }
 
@@ -31,8 +31,10 @@ var findSum = function( i, j, grid, r, c) {
   var sum = 0;
   for(var x = i - 1; x <= i + 1; x++) {
     for(var y = j - 1; y <= j + 1; y++) {
-      if (x >= 0 && x < r && y >= 0 && y < c)
-          sum += grid[i][j];
+      if (x >= 0 && x < r && y >= 0 && y < c) {
+        //if (grid.getCellAt(x,y).$el.css("background") == "green")
+          sum += grid.getCellAt(i, j).val;
+        }
     }
   }
   return sum;
