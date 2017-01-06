@@ -29,18 +29,23 @@
 <script src = "scripts/grid.js"></script>
 <script src = "scripts/game.js"></script>
 <script>
-var interval ;
-var dict = {0: 'red', 1: 'green'};
+var GameOfLife = function() {
+    "use strict";
+var interval = null;
+var dict = {
+            0: 'red',
+            1: 'green'
+};
+
+var grid = new Grid({
+            rows: 5,
+            cols: 5,
+            render: {
+              placeholder: ".grid"
+            }
+});
 
 function createGrid() {
-  var grid = new Grid({
-    rows: 5,
-    cols: 5,
-    render: {
-      placeholder: ".grid"
-    }
-  });
-
   for(var i = 0; i < grid.rowsCount; i++) {
     for(var j = 0; j < grid.colsCount; j++) {
      //var randomVar = Math.floor(Math.random()*2);  //In JS, random function generates float
@@ -56,21 +61,21 @@ function createGrid() {
   grid.getCellAt(2,2).$el.css('background', dict[1]);
   grid.getCellAt(2,3).$el.css('background', dict[1]);
 
-  return grid;
+  //return grid;
 };
 
 function drawGrid() {
-    var grid = createGrid();
-    //grid = game(grid);
-    interval = setInterval(step(grid, dict), 100);
+    createGrid();
 };
 
-function step(grid, dict) {
- grid = update(game(grid));
+function step() {
+  grid = game(grid);
+  update();
+ console.log('grid updated.')
  //update(grid);
 };
 
-function update(grid) {
+function update() {
   for(var i = 0; i < grid.rowsCount; i++) {
     for(var j = 0; j < grid.colsCount; j++) {
       var nextVal = grid.getCellAt(i,j).val ;
@@ -78,6 +83,7 @@ function update(grid) {
       grid.getCellAt(i,j).$el.css('background', dict[nextVal]);
     }
   }
+  return grid;
 };
 
 function onStop(){
@@ -85,16 +91,25 @@ function onStop(){
 }
 /*
 (function GameOfLife () {
-  "use strict";
-
- //grid = game(grid);
  //setTimeout(looper(grid, dict), 1000);
  //setInterval(looper(grid, dict), 1000);
 
 }());
 */
+return {
+  draw: function() {
+    drawGrid();
+  },
+  nextStep: function() {
+    step();
+  }
+};
+}();
+GameOfLife.draw();
+GameOfLife.nextStep();
+GameOfLife.nextStep();
 </script>
-<button type = "button" onclick="drawGrid();">Try it</button>
+<button type = "button" >Try it</button>
 <button type = "button" onclick="onStop();">Stop it</button>
 </body>
 </html>
