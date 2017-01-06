@@ -4,6 +4,7 @@ var game = function(grid) {
 
   for( var i = 0; i < r; i++) {
     for (var j = 0; j < c; j++) {
+      //console.log("Grid at the beginning: ", grid.getCellAt(i, j).val);
       var sum = findSum( i, j, grid, r, c);
       if (sum == 3) { //always 1
         if (grid.getCellAt(i, j).val == 0) grid.getCellAt(i, j).val = 2;
@@ -15,16 +16,17 @@ var game = function(grid) {
       }
       else if (grid.getCellAt(i, j).val == 0) grid.getCellAt(i, j).val = 0;
       else grid.getCellAt(i, j).val = 1;
+      console.log("This is 2 digit sum and result :", sum, grid.getCellAt(i, j).val, "for", i, j);
     }
   }
 
   for(var i = 0; i < r; i++) {
     for(var j = 0; j < c; j++) {
+      console.log("before: ", grid.getCellAt(i, j).val,i, j);
       (grid.getCellAt(i, j).val) >>= 1;
-      //console.log(grid.getCellAt(i, j).val, i, j);
+      console.log(grid.getCellAt(i, j).val, i, j);
     }
   }
-
   return grid;
 }
 
