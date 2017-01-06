@@ -7,17 +7,18 @@ var game = function(grid) {
       //console.log("Grid at the beginning: ", grid.getCellAt(i, j).val, "for", i, j);
       var sum = findSum( i, j, grid, r, c);
       if (sum == 3) { //always 1
-        console.log("m here in 3");
+        //console.log("m here in 3", grid.getCellAt(i, j).val);
         if (grid.getCellAt(i, j).val == 0) grid.getCellAt(i, j).val = 2;
         else grid.getCellAt(i, j).val = 3;
+        //console.log("m here in 3 after ", grid.getCellAt(i, j).val);
       }
-      if (sum == 4) { //stays as it is
+      else if (sum == 4) { //stays as it is
         if (grid.getCellAt(i, j).val == 0) grid.getCellAt(i, j).val = 0;
         else grid.getCellAt(i, j).val = 3;
       }
       else if (grid.getCellAt(i, j).val == 0) grid.getCellAt(i, j).val = 0;
       else grid.getCellAt(i, j).val = 1;
-      console.log("This is 2 digit sum and result :", sum, grid.getCellAt(i, j).val, "for", i, j);
+      //console.log("This is 2 digit sum and result :", sum, grid.getCellAt(i, j).val, "for", i, j);
     }
   }
 
@@ -38,10 +39,10 @@ var findSum = function( i, j, grid, r, c) {
       if (x >= 0 && x < r && y >= 0 && y < c) {
         //if (grid.getCellAt(x,y).$el.css("background") == "green")
           sum += ( grid.getCellAt(x, y).val & 1);
-          console.log( (grid.getCellAt(x, y).val & 1), x, y);
+          //console.log( (grid.getCellAt(x, y).val & 1), x, y);
         }
     }
   }
-  console.log(sum, i, j, "final");
+  //console.log(sum, i, j, "final");
   return sum;
 }
