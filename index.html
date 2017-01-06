@@ -86,9 +86,6 @@ function update() {
   return grid;
 };
 
-function onStop(){
-  clearInterval(interval);
-}
 /*
 (function GameOfLife () {
  //setTimeout(looper(grid, dict), 1000);
@@ -102,14 +99,30 @@ return {
   },
   nextStep: function() {
     step();
+  },
+  onStop: function() {
+    clearInterval(interval);
+  },
+  setTheInterval: function(the_interval) {
+    interval = the_interval;
+  },
+  getInterval: function() {
+    return interval;
   }
 };
 }();
+
 GameOfLife.draw();
-GameOfLife.nextStep();
-GameOfLife.nextStep();
+function game_toggle(GameOfLife) {
+  var intervalId = GameOfLife.getInterval();
+ {
+    intervalId = setInterval(GameOfLife.nextStep(), 100);
+    game.setTheInterval(intervalId);
+  }
+};
+
 </script>
-<button type = "button" >Try it</button>
-<button type = "button" onclick="onStop();">Stop it</button>
+<button type = "button" onclick="game_toggle(GameOfLife);">Try it</button>
+<button type = "button" onclick="GameOfLife.onStop();">Stop it</button>
 </body>
 </html>
