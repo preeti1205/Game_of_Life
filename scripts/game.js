@@ -7,6 +7,7 @@ var game = function(grid) {
       //console.log("Grid at the beginning: ", grid.getCellAt(i, j).val, "for", i, j);
       var sum = findSum( i, j, grid, r, c);
       if (sum == 3) { //always 1
+        console.log("m here in 3");
         if (grid.getCellAt(i, j).val == 0) grid.getCellAt(i, j).val = 2;
         else grid.getCellAt(i, j).val = 3;
       }
@@ -16,7 +17,7 @@ var game = function(grid) {
       }
       else if (grid.getCellAt(i, j).val == 0) grid.getCellAt(i, j).val = 0;
       else grid.getCellAt(i, j).val = 1;
-      //console.log("This is 2 digit sum and result :", sum, grid.getCellAt(i, j).val, "for", i, j);
+      console.log("This is 2 digit sum and result :", sum, grid.getCellAt(i, j).val, "for", i, j);
     }
   }
 
