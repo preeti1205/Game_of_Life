@@ -29,17 +29,25 @@
 <script src = "scripts/grid.js"></script>
 <script src = "scripts/game.js"></script>
 <script>
-var looper = function(grid, dict) {
-  for(var i = 0; i < grid.rowsCount; i++) {
-    for(var j = 0; j < grid.colsCount; j++) {
-      var nextVal = grid.getCellAt(i,j).val ;
-      //console.log(nextVal);
-      grid.getCellAt(i,j).$el.css('background', dict[nextVal]);
-    }
-  }
-};
+var interval ;
 
-(function() {
+function changeGrid() {
+    grid = game(grid);
+    interval = setInterval(looper(grid, dict), 1000);
+}
+
+function looper(grid, dict) {
+  //grid = game(grid);
+ for(var i = 0; i < grid.rowsCount; i++) {
+   for(var j = 0; j < grid.colsCount; j++) {
+     var nextVal = grid.getCellAt(i,j).val ;
+     //console.log(nextVal);
+     grid.getCellAt(i,j).$el.css('background', dict[nextVal]);
+   }
+ }
+}
+
+(function GameOfLife () {
   "use strict";
 
   var grid = new Grid({
@@ -52,7 +60,6 @@ var looper = function(grid, dict) {
   //grid.getCellAt(2,1).$el.css('background', 'green');
   var dict = {0: 'red', 1: 'green'};
 
-
   for(var i = 0; i < grid.rowsCount; i++) {
     for(var j = 0; j < grid.colsCount; j++) {
        //var randomVar = Math.floor(Math.random()*2);  //In JS, random function generates float
@@ -62,24 +69,19 @@ var looper = function(grid, dict) {
     }
   }
 
-  grid.getCellAt(2,1).$el.css('background', 'green');
-  grid.getCellAt(2,2).$el.css('background', 'green');
-  grid.getCellAt(2,3).$el.css('background', 'green');
   grid.getCellAt(2,1).val = 1 ;
   grid.getCellAt(2,2).val = 1 ;
   grid.getCellAt(2,3).val = 1 ;
-  //grid.getCellAt(4,5).$el.css('background', 'green');
-  //grid.getCellAt(6,5).$el.css('background', 'green');
+  grid.getCellAt(2,1).$el.css('background', dict[1]);
+  grid.getCellAt(2,2).$el.css('background', dict[1]);
+  grid.getCellAt(2,3).$el.css('background', dict[1]);
 
-for(var i = 0; i < 3; i++) {
- grid = game(grid);
- setTimeout(function(){
-        looper(grid, dict);}
-    , 200);
- //looper(grid, dict);
- }
+ //grid = game(grid);
+ //setTimeout(looper(grid, dict), 1000);
+ //setInterval(looper(grid, dict), 1000);
 
 }());
 </script>
+<button type = "button" onclick="changeGrid();">Try it</button>
 </body>
 </html>
