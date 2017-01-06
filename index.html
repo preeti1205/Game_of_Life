@@ -30,26 +30,9 @@
 <script src = "scripts/game.js"></script>
 <script>
 var interval ;
+var dict = {0: 'red', 1: 'green'};
 
-function changeGrid() {
-    grid = game(grid);
-    interval = setInterval(looper(grid, dict), 1000);
-}
-
-function looper(grid, dict) {
-  //grid = game(grid);
- for(var i = 0; i < grid.rowsCount; i++) {
-   for(var j = 0; j < grid.colsCount; j++) {
-     var nextVal = grid.getCellAt(i,j).val ;
-     //console.log(nextVal);
-     grid.getCellAt(i,j).$el.css('background', dict[nextVal]);
-   }
- }
-}
-
-(function GameOfLife () {
-  "use strict";
-
+function createGrid() {
   var grid = new Grid({
     rows: 5,
     cols: 5,
@@ -57,18 +40,15 @@ function looper(grid, dict) {
       placeholder: ".grid"
     }
   });
-  //grid.getCellAt(2,1).$el.css('background', 'green');
-  var dict = {0: 'red', 1: 'green'};
 
   for(var i = 0; i < grid.rowsCount; i++) {
     for(var j = 0; j < grid.colsCount; j++) {
-       //var randomVar = Math.floor(Math.random()*2);  //In JS, random function generates float
-       grid.getCellAt(i,j).val = 0 ;
-      //console.log( i, j, grid.getCellAt(i,j).val);
+     //var randomVar = Math.floor(Math.random()*2);  //In JS, random function generates float
+      grid.getCellAt(i,j).val = 0 ;
+    //console.log( i, j, grid.getCellAt(i,j).val);
       grid.getCellAt(i,j).$el.css('background', "red");
     }
   }
-
   grid.getCellAt(2,1).val = 1 ;
   grid.getCellAt(2,2).val = 1 ;
   grid.getCellAt(2,3).val = 1 ;
@@ -76,12 +56,45 @@ function looper(grid, dict) {
   grid.getCellAt(2,2).$el.css('background', dict[1]);
   grid.getCellAt(2,3).$el.css('background', dict[1]);
 
+  return grid;
+};
+
+function drawGrid() {
+    var grid = createGrid();
+    //grid = game(grid);
+    interval = setInterval(step(grid, dict), 100);
+};
+
+function step(grid, dict) {
+ grid = update(game(grid));
+ //update(grid);
+};
+
+function update(grid) {
+  for(var i = 0; i < grid.rowsCount; i++) {
+    for(var j = 0; j < grid.colsCount; j++) {
+      var nextVal = grid.getCellAt(i,j).val ;
+      //console.log(nextVal);
+      grid.getCellAt(i,j).$el.css('background', dict[nextVal]);
+    }
+  }
+};
+
+function onStop(){
+  clearInterval(interval);
+}
+/*
+(function GameOfLife () {
+  "use strict";
+
  //grid = game(grid);
  //setTimeout(looper(grid, dict), 1000);
  //setInterval(looper(grid, dict), 1000);
 
 }());
+*/
 </script>
-<button type = "button" onclick="changeGrid();">Try it</button>
+<button type = "button" onclick="drawGrid();">Try it</button>
+<button type = "button" onclick="onStop();">Stop it</button>
 </body>
 </html>

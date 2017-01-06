@@ -72,4 +72,4 @@
 
   global.Grid = Grid;
 
-}(window));  //parameter passed to the outermost function which will be called global inside the function
+}(window));  //parameter passed to the outermost function which will be called "global" inside the function
