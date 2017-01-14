@@ -69,10 +69,10 @@ function drawGrid() {
 };
 
 function step() {
-  grid = game(grid);
-  update();
+  grid = update( game(grid));
+  //grid = update();
  console.log('grid updated.')
- //update(grid);
+ return grid;
 };
 
 function update() {
@@ -88,9 +88,6 @@ function update() {
 
 /*
 (function GameOfLife () {
- //setTimeout(looper(grid, dict), 1000);
- //setInterval(looper(grid, dict), 1000);
-
 }());
 */
 return {
@@ -98,7 +95,8 @@ return {
     drawGrid();
   },
   nextStep: function() {
-    step();
+    var new_grid = step();
+    grid = new_grid ;
   },
   onStop: function() {
     clearInterval(interval);
@@ -113,16 +111,16 @@ return {
 }();
 
 GameOfLife.draw();
-function game_toggle(GameOfLife) {
+function game_toggle() {
   var intervalId = GameOfLife.getInterval();
  {
-    intervalId = setInterval(GameOfLife.nextStep(), 100);
+    intervalId = setTimeout(GameOfLife.nextStep(), 100);
     game.setTheInterval(intervalId);
   }
 };
 
 </script>
-<button type = "button" onclick="game_toggle(GameOfLife);">Try it</button>
+<button type = "button" onclick="game_toggle();">Try it</button>
 <button type = "button" onclick="GameOfLife.onStop();">Stop it</button>
 </body>
 </html>
