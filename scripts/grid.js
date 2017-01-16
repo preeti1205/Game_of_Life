@@ -12,7 +12,7 @@
 
   //class Grid
   function Grid( config ) {
-    this.grid = [];
+    this.grid = [];   //vector ->total elements is the number of rows
     this.cells = [];
     this.rowsCount = config.rows;
     this.colsCount = config.cols;
@@ -26,7 +26,7 @@
 
   //container called Grid.prototype for common methods and properties
   Grid.prototype = {
-    createCell: function( config ) {
+    createCell: function( config ) {  //config is a json object
       return new Cell( config );
     },
 
@@ -55,11 +55,11 @@
 
       var i, j, $row, $cell, cell, cellId = 0;
       for( i = 0; i < this.rowsCount; i += 1) {
-        this.grid[i] = [];
-        $row = $('<div class = "row"></div>').prependTo(this.$placeholder);
+        this.grid[i] = [];  //every element in grid vector is also a vector
+        $row = $('<div class = "row"></div>').prependTo(this.$placeholder);  //<div class = "grid"> <div class = "row"></div> </div>
         for( j = 0; j < this.colsCount; j += 1) {
           $cell = $('<div class = "cell"></div>').appendTo($row);
-          cell = this.createCell({$element: $cell, x: i, y: j});
+          cell = this.createCell({$element: $cell, x: i, y: j, val: 0}); //initialize with 0 val
           this.grid[i].push(cell);
           this.cells.push(cell);
         }

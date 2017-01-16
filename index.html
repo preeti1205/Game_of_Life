@@ -5,7 +5,7 @@
   <style>
   .grid {
     border: 1px solid #ddd;
-    display: inline-block;
+    display: inline-block;  /* inline-block is better alternate of float as we don't need clear with it */
     padding: 1px;
     }
     .row {
@@ -37,23 +37,25 @@ var dict = {
             1: 'green'
 };
 
-var grid = new Grid({
+var grid = new Grid({   //this inside the curly braces is a json object
             rows: 5,
             cols: 5,
             render: {
-              placeholder: ".grid"
+              placeholder: ".grid"   //pass the css element
             }
 });
 
 function createGrid() {
+  /*
   for(var i = 0; i < grid.rowsCount; i++) {
     for(var j = 0; j < grid.colsCount; j++) {
      //var randomVar = Math.floor(Math.random()*2);  //In JS, random function generates float
-      grid.getCellAt(i,j).val = 0 ;
+      //grid.getCellAt(i,j).val = 0 ;
     //console.log( i, j, grid.getCellAt(i,j).val);
-      grid.getCellAt(i,j).$el.css('background', "red");
+      grid.getCellAt(i,j).$el.css('background', dict[0]);
     }
   }
+  */
   grid.getCellAt(2,1).val = 1 ;
   grid.getCellAt(2,2).val = 1 ;
   grid.getCellAt(2,3).val = 1 ;
@@ -79,7 +81,7 @@ function update() {
   for(var i = 0; i < grid.rowsCount; i++) {
     for(var j = 0; j < grid.colsCount; j++) {
       var nextVal = grid.getCellAt(i,j).val ;
-      //console.log(nextVal);
+      console.log("update in progress");
       grid.getCellAt(i,j).$el.css('background', dict[nextVal]);
     }
   }
@@ -115,7 +117,7 @@ function game_toggle() {
   var intervalId = GameOfLife.getInterval();
  {
     intervalId = setTimeout(GameOfLife.nextStep(), 100);
-    game.setTheInterval(intervalId);
+    GameOfLife.setTheInterval(intervalId);
   }
 };
 
