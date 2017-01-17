@@ -109,30 +109,15 @@ return {
     return interval;
   },
   game_toggle: function() {
-    var intervalId = GameOfLife.getInterval();
-   {
-      intervalId = setInterval(GameOfLife.nextStep(), 100);
-      GameOfLife.setTheInterval(intervalId);
-    }
+    var intervalId = setInterval(GameOfLife.nextStep(), 10);
+    GameOfLife.setTheInterval(intervalId);
   },
 };
 }();
 
-//GameOfLife.draw();
-//GameOfLife.game_toggle();
-/*
-function game_toggle() {
-  var intervalId = GameOfLife.getInterval();
- {
-    intervalId = setInterval(GameOfLife.nextStep(), 100);
-    GameOfLife.setTheInterval(intervalId);
-  }
-};
-*/
-
 </script>
 <button type = "button" onclick="GameOfLife.draw();">Set</button>
-<button type = "button" onclick="GameOfLife.game_toggle();">Try it</button>
+<button type = "button" onclick="GameOfLife.game_toggle();">Run</button>
 <button type = "button" onclick="GameOfLife.onStop();">Stop it</button>
 </body>
 </html>
