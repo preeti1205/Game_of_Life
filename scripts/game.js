@@ -29,7 +29,7 @@ var game = function(grid) {
       //console.log(grid.getCellAt(i, j).val, i, j);
     }
   }
-  return grid;
+  //return grid;
 }
 
 var findSum = function( i, j, grid, r, c) {

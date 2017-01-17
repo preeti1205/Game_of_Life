@@ -44,9 +44,8 @@ var grid = new Grid({   //this inside the curly braces is a json object
               placeholder: ".grid"   //pass the css element
             }
 });
-
+/*
 function createGrid() {
-  /*
   for(var i = 0; i < grid.rowsCount; i++) {
     for(var j = 0; j < grid.colsCount; j++) {
      //var randomVar = Math.floor(Math.random()*2);  //In JS, random function generates float
@@ -55,37 +54,36 @@ function createGrid() {
       grid.getCellAt(i,j).$el.css('background', dict[0]);
     }
   }
-  */
+  //return grid;
+};
+*/
+
+function drawGrid() {
+  //createGrid();
   grid.getCellAt(2,1).val = 1 ;
   grid.getCellAt(2,2).val = 1 ;
   grid.getCellAt(2,3).val = 1 ;
   grid.getCellAt(2,1).$el.css('background', dict[1]);
   grid.getCellAt(2,2).$el.css('background', dict[1]);
   grid.getCellAt(2,3).$el.css('background', dict[1]);
-
-  //return grid;
-};
-
-function drawGrid() {
-    createGrid();
 };
 
 function step() {
-  grid = update( game(grid));
-  //grid = update();
+  //grid = update( game(grid));
+ update( game(grid));
  console.log('grid updated.')
- return grid;
+ //return grid;
 };
 
 function update() {
+  console.log("update in progress");
   for(var i = 0; i < grid.rowsCount; i++) {
     for(var j = 0; j < grid.colsCount; j++) {
       var nextVal = grid.getCellAt(i,j).val ;
-      console.log("update in progress");
       grid.getCellAt(i,j).$el.css('background', dict[nextVal]);
     }
   }
-  return grid;
+  //return grid;
 };
 
 /*
@@ -97,8 +95,9 @@ return {
     drawGrid();
   },
   nextStep: function() {
-    var new_grid = step();
-    grid = new_grid ;
+    step();
+    //var new_grid = step();
+    //grid = new_grid ;
   },
   onStop: function() {
     clearInterval(interval);
@@ -108,21 +107,32 @@ return {
   },
   getInterval: function() {
     return interval;
-  }
+  },
+  game_toggle: function() {
+    var intervalId = GameOfLife.getInterval();
+   {
+      intervalId = setInterval(GameOfLife.nextStep(), 100);
+      GameOfLife.setTheInterval(intervalId);
+    }
+  },
 };
 }();
 
-GameOfLife.draw();
+//GameOfLife.draw();
+//GameOfLife.game_toggle();
+/*
 function game_toggle() {
   var intervalId = GameOfLife.getInterval();
  {
-    intervalId = setTimeout(GameOfLife.nextStep(), 100);
+    intervalId = setInterval(GameOfLife.nextStep(), 100);
     GameOfLife.setTheInterval(intervalId);
   }
 };
+*/
 
 </script>
-<button type = "button" onclick="game_toggle();">Try it</button>
+<button type = "button" onclick="GameOfLife.draw();">Set</button>
+<button type = "button" onclick="GameOfLife.game_toggle();">Try it</button>
 <button type = "button" onclick="GameOfLife.onStop();">Stop it</button>
 </body>
 </html>
